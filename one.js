@@ -6,9 +6,6 @@ const output = fs.createWriteStream("hash.txt");
 
 var hash = crypto.createHash('md5');
 
-//чтобы сравнить 2 значения, в файле и в консольке
-//hash.setEncoding('hex');
-
 input.on("end",  () => {
     hash.end();
     console.log(hash.read());

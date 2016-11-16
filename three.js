@@ -8,7 +8,8 @@ class CReadable extends Readable {
     }
 
     _read() {
-        this.push('1');
+        let num = Math.floor(Math.random() * 90000) + 10000;
+        this.push(num.toString());
     }
 }
 
@@ -30,8 +31,8 @@ class CTransform extends Transform {
     }
 
     _transform(chunk, encoding, done) {
-        this.push(chunk)
-        done();
+        this.push(`===${chunk}===`);
+        setInterval(done, 1000);
     }
 }
 
@@ -39,7 +40,4 @@ const input = new CReadable();
 const output = new CWritable();
 const ct = new CTransform();
 
-
-
-//setInterval(() => input.pipe(ct), 1000);
-//ct.pipe(output);
+input.pipe(ct).pipe(output);
